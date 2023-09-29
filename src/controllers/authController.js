@@ -21,6 +21,8 @@ class AuthController {
       last_name: userData.user.last_name,
       role: userData.user.role,
     };
+
+    res.cookie('coderCookieToken', userData.token, { httpOnly: true, secure: false });
   
     console.log('Role retrieved:', userData.user.role);
   

@@ -5,7 +5,9 @@ import { userModel } from "../models/user.models.js";
 import { createHash, isValidPassword } from "../../utils.js";
 import GitHubStrategy from "passport-github2";
 import AuthService from "../services/authService.js";
+import dotenv from "dotenv";
 
+dotenv.config();
 const JWTStrategy = jwt.Strategy;
 const ExtractJWT = jwt.ExtractJwt;
 const LocalStrategy = local.Strategy;
@@ -88,7 +90,7 @@ const initializePassport = () => {
     new JWTStrategy(
       {
         jwtFromRequest: ExtractJWT.fromExtractors([cookieExtractor]),
-        secretOrKey: "S3CR3T0",
+        secretOrKey: process.env.JWT_SECRET,
       },
       async (jwt_payload, done) => {
         try {
@@ -109,8 +111,8 @@ passport.use(
   "github",
   new GitHubStrategy(
     {
-      clientID: "Iv1.73f68db85517c75a",
-      clientSecret: "71d4448bf3dfb5105cacaee92a7e1907603506a7",
+      clientID: process.env.CLIENT_ID_GITHUB,
+      clientSecret: process.env.CLIENT_SECRET_GITHUB,
       callbackURL: "http://localhost:8000/api/sessions/githubcallback",
     },
     async (accessToken, refreshToken, profile, done) => {

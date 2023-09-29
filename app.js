@@ -16,9 +16,11 @@ import MongoStore from "connect-mongo";
 import passport from "passport";
 import initializePassport from "./src/config/passport.config.js";
 import cookieParser from "cookie-parser";
+import dotenv from "dotenv";
 
 const app = express();
 const port = 8000;
+dotenv.config();
 
 const httpServer = app.listen(port, () => {
   console.log("Servidor escuchando en puerto " + port);
@@ -41,13 +43,12 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 app.use(
   session({
-    secret: "M5E7",
+    secret: process.env.SECRET_KEY_SESSION,
     resave: false,
     saveUninitialized: false,
     cookie: { secure: false },
     store: MongoStore.create({
-      mongoUrl:
-        "mongodb+srv://marieljoaco:dakota123@database.yjqt73t.mongodb.net/ecomerce?retryWrites=true&w=majority",
+      mongoUrl: process.env.MONGO_URL,
       collectionName: "sessions",
     }),
   })
@@ -66,9 +67,7 @@ app.use("/", viewsRouter);
 
 const PM = new ProductManager();
 
-mongoose.connect(
-  "mongodb+srv://marieljoaco:dakota123@database.yjqt73t.mongodb.net/ecomerce?retryWrites=true&w=majority"
-);
+mongoose.connect(process.env.MONGO_URL);
 
 mongoose.connection.on("connected", () => {
   console.log("Conectado a MongoDB");
