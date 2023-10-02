@@ -18,9 +18,9 @@ import initializePassport from "./src/config/passport.config.js";
 import cookieParser from "cookie-parser";
 import dotenv from "dotenv";
 
-const app = express();
-const port = 8000;
 dotenv.config();
+const app = express();
+const port = process.env.PORT || 8000;
 
 const httpServer = app.listen(port, () => {
   console.log("Servidor escuchando en puerto " + port);

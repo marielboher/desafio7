@@ -38,7 +38,7 @@ const initializePassport = () => {
 
           console.log("Rol antes de la asignación:", user.role);
 
-          if (user.email == "adminCoder@coder.com" && password === "adminCod3r123") {
+          if (user.email == process.env.ADMIN_EMAIL && password === process.env.ADMIN_PASSWORD) {
             console.log("Asignando role de admin");
             user.role = "admin";
           } else {

@@ -147,14 +147,13 @@ class CartManager {
 
         await cartModel.updateOne({ _id: cid }, { products: [] });
         console.log("Products deleted!");
-
         return true;
       } else {
         console.log("Not found!");
-
         return false;
       }
     } catch (error) {
+      console.error(error);
       return false;
     }
   }
