@@ -5,9 +5,8 @@ import { userModel } from "../models/user.models.js";
 import { createHash, isValidPassword } from "../../utils.js";
 import GitHubStrategy from "passport-github2";
 import AuthService from "../services/authService.js";
-import dotenv from "dotenv";
+import { JWT_SECRET, CLIENT_ID_GITHUB, CLIENT_SECRET_GITHUB, ADMIN_EMAIL, ADMIN_PASSWORD } from "../config/config.js";
 
-dotenv.config();
 const JWTStrategy = jwt.Strategy;
 const ExtractJWT = jwt.ExtractJwt;
 const LocalStrategy = local.Strategy;

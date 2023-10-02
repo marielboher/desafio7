@@ -16,9 +16,8 @@ import MongoStore from "connect-mongo";
 import passport from "passport";
 import initializePassport from "./src/config/passport.config.js";
 import cookieParser from "cookie-parser";
-import dotenv from "dotenv";
+import { MONGO_URL, SECRET_KEY_SESSION, PORT } from "./src/config/config.js";
 
-dotenv.config();
 const app = express();
 const port = process.env.PORT || 8000;
 
